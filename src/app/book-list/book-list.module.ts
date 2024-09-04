@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { BookListService } from './services/book-list.service';
 import { BookListComponent } from './components/book-list/book-list.component';
@@ -15,7 +16,7 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [BookListComponent, BookFilterComponent],
-  imports: [CommonModule, RouterModule.forChild(routes)],
+  imports: [CommonModule, RouterModule.forChild(routes), ReactiveFormsModule],
   providers: [BookListService],
 })
 export class BookListModule {}

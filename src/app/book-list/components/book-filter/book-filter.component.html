@@ -1,8 +1,19 @@
-<div>
-  <p><label for="author-id-select">Author Selection</label></p>
-  <select id="author-id-select" (change)="onAuthorSelect($event)">
-    <option value="1">Harper Lee</option>
-    <option value="2">Jane Austen</option>
-    <option value="3">George Orwell</option>
-  </select>
-</div>
+<form [formGroup]="filterForm" class="filter-form">
+  <fieldset class="filter-field">
+    <p><label for="author-id-select">Author Selection</label></p>
+    <select id="author-id-select" formControlName="author">
+      <option value="1">Harper Lee</option>
+      <option value="2">Jane Austen</option>
+      <option value="3">George Orwell</option>
+    </select>
+  </fieldset>
+
+  <fieldset class="filter-field">
+    <p><label for="country-select">Country Selection</label></p>
+    <select id="country-select" formControlName="country">
+      <option value="United States">United States</option>
+      <option value="United Kingdom">United Kingdom</option>
+      <option value="Russia">Russia</option>
+    </select>
+  </fieldset>
+</form>

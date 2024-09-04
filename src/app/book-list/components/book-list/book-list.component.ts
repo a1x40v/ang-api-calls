@@ -11,7 +11,9 @@ import { BookInterface } from '../../../shared/types/book.interface';
   styleUrl: './book-list.component.css',
 })
 export class BookListComponent implements OnInit {
-  private selectedAuthor: string | null = null;
+  private selectedAuthorId: string | null = null;
+  private selectedCountry: string | null = null;
+
   books$!: Observable<BookInterface[]>;
 
   constructor(
@@ -25,13 +27,17 @@ export class BookListComponent implements OnInit {
 
   initializeListeners() {
     this.route.queryParams.subscribe((params) => {
-      this.selectedAuthor = params['authorId'] || null;
+      this.selectedAuthorId = params['authorId'] || null;
+      this.selectedCountry = params['country'] || null;
 
       this.fetchData();
     });
   }
 
   fetchData(): void {
-    this.books$ = this.bookListService.getAllBooks(this.selectedAuthor);
+    this.books$ = this.bookListService.getAllBooks(
+      this.selectedAuthorId,
+      this.selectedCountry
+    );
   }
 }
