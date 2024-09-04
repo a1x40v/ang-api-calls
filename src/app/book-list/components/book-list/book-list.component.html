@@ -1,7 +1,10 @@
+<app-book-filter />
+
+@if (books$ | async) {
 <div>
-  <p>Books List of {{ books.length }} items</p>
+  <p>Books List of {{ (books$ | async)?.length }} items</p>
   <ul class="book-list">
-    @for(book of books; track book.id) {
+    @for(book of (books$ | async); track book.id) {
     <li class="book">
       <p>Id: {{ book.id }}, Title: {{ book.title }}</p>
       <p>Author: {{ book.author }}</p>
@@ -10,3 +13,4 @@
     }
   </ul>
 </div>
+}

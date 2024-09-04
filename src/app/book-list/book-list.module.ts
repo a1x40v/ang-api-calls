@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { BookListService } from './services/book-list.service';
 import { BookListComponent } from './components/book-list/book-list.component';
+import { BookFilterComponent } from './components/book-filter/book-filter.component';
 
 const routes: Routes = [
   {
@@ -13,7 +14,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [BookListComponent],
+  declarations: [BookListComponent, BookFilterComponent],
   imports: [CommonModule, RouterModule.forChild(routes)],
   providers: [BookListService],
 })

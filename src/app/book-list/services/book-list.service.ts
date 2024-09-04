@@ -9,8 +9,12 @@ import { BookInterface } from '../../shared/types/book.interface';
 export class BookListService {
   constructor(private httpClient: HttpClient) {}
 
-  getAllBooks(): Observable<BookInterface[]> {
-    const url = `${environment.apiUrl}/books`;
+  getAllBooks(authorId: string | null): Observable<BookInterface[]> {
+    let url = `${environment.apiUrl}/books`;
+
+    if (authorId !== null) {
+      url = `${url}?authorId=${authorId}`;
+    }
 
     return this.httpClient.get<BookInterface[]>(url);
   }

@@ -1,4 +1,6 @@
-import { Component, DestroyRef, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs';
 
 import { BookListService } from '../../services/book-list.service';
 import { BookInterface } from '../../../shared/types/book.interface';
@@ -9,24 +11,27 @@ import { BookInterface } from '../../../shared/types/book.interface';
   styleUrl: './book-list.component.css',
 })
 export class BookListComponent implements OnInit {
-  books: BookInterface[] = [];
+  private selectedAuthor: string | null = null;
+  books$!: Observable<BookInterface[]>;
 
   constructor(
-    private destroyRef: DestroyRef,
+    private route: ActivatedRoute,
     private bookListService: BookListService
   ) {}
 
   ngOnInit(): void {
-    this.fetchData();
+    this.initializeListeners();
+  }
+
+  initializeListeners() {
+    this.route.queryParams.subscribe((params) => {
+      this.selectedAuthor = params['authorId'] || null;
+
+      this.fetchData();
+    });
   }
 
   fetchData(): void {
-    const sub = this.bookListService.getAllBooks().subscribe((books) => {
-      this.books = books;
-    });
-
-    this.destroyRef.onDestroy(() => {
-      sub.unsubscribe();
-    });
+    this.books$ = this.bookListService.getAllBooks(this.selectedAuthor);
   }
 }
