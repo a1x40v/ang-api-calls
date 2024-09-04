@@ -1,0 +1,12 @@
+<div>
+  <p>Books List of {{ books.length }} items</p>
+  <ul class="book-list">
+    @for(book of books; track book.id) {
+    <li class="book">
+      <p>Id: {{ book.id }}, Title: {{ book.title }}</p>
+      <p>Author: {{ book.author }}</p>
+      <p>Rating: {{ book.rating }}</p>
+    </li>
+    }
+  </ul>
+</div>
